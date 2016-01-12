@@ -1,0 +1,9 @@
+Package: MetaCor
+Type: Package
+Title: Performs Stratified SNP-trait analysis and combines the results using the MetaCor method
+Version: 1.0
+Date: 2016-01-07
+Author: Tamar Sofer with contributions from Matt Conomos
+Maintainer: Tamar Sofer  <tsofer@uw.edu>
+Description: Given matrices of genotype data, adjusting covariates, kinship and (potentially) other correlation matrices, a trait of interest, and labels of the individals assigning them to strata,estimates the SNP-trait associations in each stratum, and the covariance between the estimates, and combines these estimates via the MetaCor meta-analysis method. 
+License: GPL-2
