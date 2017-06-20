@@ -33,6 +33,10 @@ function(Y, W, G, covMatList, IDsList, blockSize = 5000, metaCorBlockSize = 5000
 		Y <- Y[-na.inds]
 		G <- G[-na.inds, , drop = F]
 		W <- W[-na.inds, , drop = F]
+		for (i in 1:n.strat){
+			IDsList[[i]] <- intersect(IDsList[[i]], rownames(W))
+		}
+
 	}
 	
 	if (verbose) message(paste("There are", length(Y), "individuals in the data"))
