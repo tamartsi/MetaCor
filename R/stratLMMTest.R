@@ -20,6 +20,9 @@ function(Y, W, G, covMatList, IDsList, blockSize = 5000, metaCorBlockSize = 5000
 	if (is.null(rownames(G))) rownames(G) <- rownames(W)
 	
 	k <- ncol(W)
+	n.strat <- length(IDsList)
+	if (n.strat == 1) message("only one strata was defined!")
+	
 	if (is.null(IDsList)) IDsList <- list(pooled = rownames(W))
 	stopifnot(all(is.element(do.call(c, IDsList), rownames(W))))
 	
@@ -43,8 +46,7 @@ function(Y, W, G, covMatList, IDsList, blockSize = 5000, metaCorBlockSize = 5000
 	
 	if (verbose) message("Defining strata-specific outcome, covariates, genotype, and variance objects...")
 	
-	n.strat <- length(IDsList)
-	if (n.strat == 1) message("only one strata was defined!")
+
 	strat.names <- names(IDsList)
 	
 	Y.old <- Y
