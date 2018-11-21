@@ -62,6 +62,14 @@ function(Y, W, G, covMatList, IDsList, blockSize = 5000, metaCorBlockSize = 5000
 		Y[[i]] <- Y.old[match(IDsList[[i]], names(Y.old))]
 		W[[i]] <- W.old[match(IDsList[[i]], rownames(W.old)), , drop = F]
 		G[[i]] <- G.old[match(IDsList[[i]], rownames(G.old)), , drop = F]
+		
+		## check for collinearity of covariates within stratum:
+		temp.mod <- lm(Y[[i]] ~ -1 + W[[i]])
+		inds <- which(summary(temp.mod)$aliased)
+		if (length(inds) > 0){
+			W[[i]] <- W[[i]][,-inds]
+		}
+
 	
 		temp.varComp <- estVarComp(Y[[i]], W[[i]], covMatList, IDs = IDsList[[i]], verbose = verbose)
 		cholSigmaInv[[i]] <- temp.varComp$cholSigmaInv
